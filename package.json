@@ -1,0 +1,22 @@
+{
+  "name": "issuelist",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "compile": "babel src --watch --presets @babel/react --out-dir public",
+    "start": "nodemon index.js",
+    "all": "concurrently \"npm run compile\" \"npm run start\""
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.1",
+    "nodemon": "^2.0.19"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.18.10",
+    "@babel/core": "^7.19.0",
+    "@babel/preset-react": "^7.18.6"
+  }
+}
