@@ -28,10 +28,7 @@ const IssueTable = ({issues}) => {
         <td>{props.Title}</td>
         <td>{props.Owner}</td>
         <td>{props.Created.toDateString()}</td>
-
         <td>{props.Due.toDateString()}</td>
-
-
         <td>{props.Status}</td>
 
 

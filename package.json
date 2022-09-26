@@ -8,7 +8,7 @@
     "start": "nodemon index.js",
     "all": "concurrently \"npm run compile\" \"npm run start\""
   },
-  "author": "",
+  "author": "Dhairya Arya",
   "license": "ISC",
   "dependencies": {
     "concurrently": "^7.4.0",
