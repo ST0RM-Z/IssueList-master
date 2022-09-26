@@ -18,43 +18,84 @@ const IssueTable = ({
   // }, 3000);
   // let counter=0;
   const IssueRow = props => {
-    return /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("td", null, props.Id), /*#__PURE__*/React.createElement("td", null, props.Title), /*#__PURE__*/React.createElement("td", null, props.Owner), /*#__PURE__*/React.createElement("td", null, props.Created.toDateString()), /*#__PURE__*/React.createElement("td", null, props.Due.toDateString()), /*#__PURE__*/React.createElement("td", null, props.Status));
+    return /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("td", null, props.Id), /*#__PURE__*/React.createElement("td", null, props.Title), /*#__PURE__*/React.createElement("td", null, props.effort), /*#__PURE__*/React.createElement("td", null, props.Owner), /*#__PURE__*/React.createElement("td", null, props.Created.toDateString()), /*#__PURE__*/React.createElement("td", null, props.Due.toDateString()), /*#__PURE__*/React.createElement("td", null, props.Status));
   };
 
   const issueRow = issues.map((issue, key) => /*#__PURE__*/React.createElement(IssueRow, {
     Id: issue.Id,
     Title: issue.Title,
     Owner: issue.Owner,
+    effort: issue.effort,
     Created: issue.Created,
     Due: issue.Due,
     Status: issue.Status,
     key: key
   }));
-  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h1", null, "Issue Table"), /*#__PURE__*/React.createElement("table", null, /*#__PURE__*/React.createElement("thead", null, /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("th", null, "ID"), /*#__PURE__*/React.createElement("th", null, "Title"), /*#__PURE__*/React.createElement("th", null, "Owner"), /*#__PURE__*/React.createElement("th", null, "Created"), /*#__PURE__*/React.createElement("th", null, "Due"), /*#__PURE__*/React.createElement("th", null, "Status"))), /*#__PURE__*/React.createElement("tbody", null, issueRow)));
+  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h1", null, "Issue Table"), /*#__PURE__*/React.createElement("table", null, /*#__PURE__*/React.createElement("thead", null, /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("th", null, "ID"), /*#__PURE__*/React.createElement("th", null, "Status"), /*#__PURE__*/React.createElement("th", null, "Owner"), /*#__PURE__*/React.createElement("th", null, "effort"), /*#__PURE__*/React.createElement("th", null, "Created"), /*#__PURE__*/React.createElement("th", null, "Due"), /*#__PURE__*/React.createElement("th", null, "Title"))), /*#__PURE__*/React.createElement("tbody", null, issueRow)));
 };
 
 const AddIssue = ({
   AddSingleIssue
 }) => {
   // let counter=0;
-  const newIssue = {
-    Owner: "Person-B",
-    Created: new Date('2022-09-19'),
-    Due: new Date("2022-09-21"),
-    Status: "Assigned",
-    Title: "this is 1st issue"
+  // const newIssue = {  Owner: "Person-B", Created: new Date('2022-09-19'), Due: new Date("2022-09-21"), Status: "Assigned", Title: "this is 1st issue" };
+  // React.useEffect(()=>{
+  //   // console.log('hello',counter);
+  //     AddSingleIssue(newIssue);      
+  //   // counter++;
+  // },[]);
+  const handleSubmit = event => {
+    event.preventDefault();
+    let form = document.forms.addForm;
+    let newIssue = {
+      Status: form.Status.value,
+      Owner: form.Owner.value,
+      effort: form.effort.value,
+      Created: new Date(form.Created.value),
+      Due: new Date(form.Due.value),
+      Title: form.Title.value
+    };
+    AddSingleIssue(newIssue);
+    console.log('form', newIssue); // form.reset();
   };
-  React.useEffect(() => {
-    // console.log('hello',counter);
-    AddSingleIssue(newIssue); // counter++;
-  }, []);
-  return /*#__PURE__*/React.createElement("h1", null, "Add Issue");
+
+  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h1", null, "This is placeholder for AddIssue"), /*#__PURE__*/React.createElement("form", {
+    name: "addForm",
+    onSubmit: handleSubmit
+  }, /*#__PURE__*/React.createElement("input", {
+    name: "Status",
+    placeholder: "Status",
+    type: "text"
+  }), /*#__PURE__*/React.createElement("input", {
+    name: "Owner",
+    placeholder: "Owner",
+    type: "text"
+  }), /*#__PURE__*/React.createElement("input", {
+    name: "effort",
+    placeholder: "Effort",
+    type: "text"
+  }), /*#__PURE__*/React.createElement("input", {
+    name: "Created",
+    placeholder: "Created",
+    type: "text"
+  }), /*#__PURE__*/React.createElement("input", {
+    name: "Due",
+    placeholder: "Due",
+    type: "text"
+  }), /*#__PURE__*/React.createElement("input", {
+    name: "Title",
+    placeholder: "Title",
+    type: "text"
+  }), /*#__PURE__*/React.createElement("button", {
+    type: "submit"
+  }, "Submit")));
 };
 
 const IssueList = () => {
   const tempIssues = [{
     Id: 1,
     Owner: "Person-B",
+    effort: 10,
     Created: new Date('2022-09-19'),
     Due: new Date("2022-09-21"),
     Status: "Assigned",
@@ -62,6 +103,7 @@ const IssueList = () => {
   }, {
     Id: 2,
     Owner: "Person-A",
+    effort: 10,
     Created: new Date('2022-09-18'),
     Due: new Date("2022-09-22"),
     Status: "Resolved",
@@ -69,6 +111,7 @@ const IssueList = () => {
   }, {
     Id: 3,
     Owner: "Person-A",
+    effort: 10,
     Created: new Date('2022-09-18'),
     Due: new Date("2022-09-21"),
     Status: "Assigned",
@@ -76,6 +119,7 @@ const IssueList = () => {
   }, {
     Id: 4,
     Owner: "Person-A",
+    effort: 10,
     Created: new Date('2022-09-18'),
     Due: new Date("2022-09-21"),
     Status: "Assigned",
@@ -83,6 +127,7 @@ const IssueList = () => {
   }, {
     Id: 5,
     Owner: "Person-A",
+    effort: 10,
     Created: new Date('2022-09-18'),
     Due: new Date("2022-09-21"),
     Status: "Assigned",
@@ -90,24 +135,28 @@ const IssueList = () => {
   }, {
     Id: 6,
     Owner: "Person-A",
+    effort: 10,
     Created: new Date('2022-09-18'),
     Due: new Date("2022-09-21"),
     Status: "Assigned",
     Title: "this is 6th issue"
   }]; // const newIssue = {  Owner: "Person-B", Created: new Date('2022-09-19'), Due: new Date("2022-09-21"), Status: "Assigned", Title: "this is 1st issue" }
 
-  const [issues, setIssues] = React.useState(tempIssues);
+  const [issues, setIssues] = React.useState(tempIssues); // const AddSingleIssue=({newIssue})=>{
+  //   // newIssue.Id = issues.length +1;
+  //   let issueList= issues;
+  //   issueList.push(newIssue);
+  //   setIssues(issueList);
+  //     }
 
-  const AddSingleIssue = ({
-    newIssue
-  }) => {
-    // newIssue.Id = issues.length +1;
-    let issueList = issues;
-    issueList.push(newIssue);
-    setIssues(issueList);
+  const AddSingleIssue = newIssues => {
+    newIssues.id = issues.length + 1;
+    let IssueList = issues.slice();
+    IssueList.push(newIssues);
+    setIssues(IssueList);
   };
 
-  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(IssueFilter, null), "\xB8", /*#__PURE__*/React.createElement("hr", null), /*#__PURE__*/React.createElement(IssueTable, {
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(IssueFilter, null), /*#__PURE__*/React.createElement("hr", null), /*#__PURE__*/React.createElement(IssueTable, {
     issues: issues
   }), /*#__PURE__*/React.createElement("hr", null), /*#__PURE__*/React.createElement(AddIssue, {
     AddSingleIssue: AddSingleIssue
@@ -115,4 +164,4 @@ const IssueList = () => {
 };
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render( /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(IssueList, null)));
+root.render( /*#__PURE__*/React.createElement(IssueList, null));
