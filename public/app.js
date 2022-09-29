@@ -18,7 +18,7 @@ const IssueTable = ({
   // }, 3000);
   // let counter=0;
   const IssueRow = props => {
-    return /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("td", null, props.Id), /*#__PURE__*/React.createElement("td", null, props.Title), /*#__PURE__*/React.createElement("td", null, props.effort), /*#__PURE__*/React.createElement("td", null, props.Owner), /*#__PURE__*/React.createElement("td", null, props.Created.toDateString()), /*#__PURE__*/React.createElement("td", null, props.Due.toDateString()), /*#__PURE__*/React.createElement("td", null, props.Status));
+    return /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("td", null, props.Id), /*#__PURE__*/React.createElement("td", null, props.Title), /*#__PURE__*/React.createElement("td", null, props.effort), /*#__PURE__*/React.createElement("td", null, props.Owner), /*#__PURE__*/React.createElement("td", null, props.Created.toString()), /*#__PURE__*/React.createElement("td", null, props.Due.toString()), /*#__PURE__*/React.createElement("td", null, props.Status));
   };
 
   const issueRow = issues.map((issue, key) => /*#__PURE__*/React.createElement(IssueRow, {
@@ -92,57 +92,36 @@ const AddIssue = ({
 };
 
 const IssueList = () => {
-  const tempIssues = [{
-    Id: 1,
-    Owner: "Person-B",
-    effort: 10,
-    Created: new Date('2022-09-19'),
-    Due: new Date("2022-09-21"),
-    Status: "Assigned",
-    Title: "this is 1st issue"
-  }, {
-    Id: 2,
-    Owner: "Person-A",
-    effort: 10,
-    Created: new Date('2022-09-18'),
-    Due: new Date("2022-09-22"),
-    Status: "Resolved",
-    Title: "this is 2nd issue"
-  }, {
-    Id: 3,
-    Owner: "Person-A",
-    effort: 10,
-    Created: new Date('2022-09-18'),
-    Due: new Date("2022-09-21"),
-    Status: "Assigned",
-    Title: "this is 3rd issue"
-  }, {
-    Id: 4,
-    Owner: "Person-A",
-    effort: 10,
-    Created: new Date('2022-09-18'),
-    Due: new Date("2022-09-21"),
-    Status: "Assigned",
-    Title: "this is 4th issue"
-  }, {
-    Id: 5,
-    Owner: "Person-A",
-    effort: 10,
-    Created: new Date('2022-09-18'),
-    Due: new Date("2022-09-21"),
-    Status: "Assigned",
-    Title: "this is 5th issue"
-  }, {
-    Id: 6,
-    Owner: "Person-A",
-    effort: 10,
-    Created: new Date('2022-09-18'),
-    Due: new Date("2022-09-21"),
-    Status: "Assigned",
-    Title: "this is 6th issue"
-  }]; // const newIssue = {  Owner: "Person-B", Created: new Date('2022-09-19'), Due: new Date("2022-09-21"), Status: "Assigned", Title: "this is 1st issue" }
-
-  const [issues, setIssues] = React.useState(tempIssues); // const AddSingleIssue=({newIssue})=>{
+  // const tempIssues = [{ Id: 1, Owner: "Person-B", effort: 10, Created: new Date('2022-09-19'), Due: new Date("2022-09-21"), Status: "Assigned", Title: "this is 1st issue" }, { Id: 2, Owner: "Person-A",effort: 10, Created: new Date('2022-09-18'), Due: new Date("2022-09-22"), Status: "Resolved", Title: "this is 2nd issue" }, { Id: 3, Owner: "Person-A",effort: 10, Created: new Date('2022-09-18'), Due: new Date("2022-09-21"), Status: "Assigned", Title: "this is 3rd issue" }, { Id: 4, Owner: "Person-A",effort: 10, Created: new Date('2022-09-18'), Due: new Date("2022-09-21"), Status: "Assigned", Title: "this is 4th issue" }, { Id: 5, Owner: "Person-A",effort: 10, Created: new Date('2022-09-18'), Due: new Date("2022-09-21"), Status: "Assigned", Title: "this is 5th issue" }, { Id: 6, Owner: "Person-A", effort: 10,Created: new Date('2022-09-18'), Due: new Date("2022-09-21"), Status: "Assigned", Title: "this is 6th issue" }]
+  // const newIssue = {  Owner: "Person-B", Created: new Date('2022-09-19'), Due: new Date("2022-09-21"), Status: "Assigned", Title: "this is 1st issue" }
+  const [issues, setIssues] = React.useState([]);
+  const query = `
+    query IssueList {
+      issueList {
+        Id
+        Status
+        Owner
+        effort
+        Created
+        Due
+        Title
+      }
+    }`;
+  React.useEffect(() => {
+    fetch('/graphql', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        query
+      })
+    }).then(async function (response) {
+      let issueData = await response.json();
+      console.log('issuedata-fetch', issueData.data.issueList);
+      setIssues(issueData.data.issueList);
+    });
+  }, []); // const AddSingleIssue=({newIssue})=>{
   //   // newIssue.Id = issues.length +1;
   //   let issueList= issues;
   //   issueList.push(newIssue);
