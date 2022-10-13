@@ -1,105 +1,148 @@
-const IssueFilter = () => {
-  return <h1>Issue Filter</h1>;
+const EmployeeFilter = () => {
+  return <h1>Employee Filter</h1>;
 };
 
-const IssueTable = ({issues}) => {
-  // const rowStyle = {
-  //   "border": "1px solid"
-  // };
-  // const tempIssues = [];
-  // const tempIssues = [{ Id: 1, Owner: "Person-B", Created: new Date('2022-09-19'), Due: new Date("2022-09-21"), Status: "Assigned", Title: "this is 1st issue" }, { Id: 2, Owner: "Person-A", Created: new Date('2022-09-18'), Due: new Date("2022-09-22"), Status: "Resolved", Title: "this is 2nd issue" }, { Id: 3, Owner: "Person-A", Created: new Date('2022-09-18'), Due: new Date("2022-09-21"), Status: "Assigned", Title: "this is 3rd issue" }, { Id: 4, Owner: "Person-A", Created: new Date('2022-09-18'), Due: new Date("2022-09-21"), Status: "Assigned", Title: "this is 4th issue" }, { Id: 5, Owner: "Person-A", Created: new Date('2022-09-18'), Due: new Date("2022-09-21"), Status: "Assigned", Title: "this is 5th issue" }, { Id: 6, Owner: "Person-A", Created: new Date('2022-09-18'), Due: new Date("2022-09-21"), Status: "Assigned", Title: "this is 6th issue" }]
-  // const newIssue = {  Owner: "Person-B", Created: new Date('2022-09-19'), Due: new Date("2022-09-21"), Status: "Assigned", Title: "this is 1st issue" }
-
-  // const [issues, setIssues] = React.useState(tempIssues);
-
-  // const issues = [{ Id: 1, Owner: "Person-B", Created: new Date('2022-09-19'), Due: new Date("2022-09-21"), Status: "Assigned", Title: "this is 1st issue" }, { Id: 2, Owner: "Person-A", Created: new Date('2022-09-18'), Due: new Date("2022-09-22"), Status: "Resolved", Title: "this is 2nd issue" }, { Id: 3, Owner: "Person-A", Created: new Date('2022-09-18'), Due: new Date("2022-09-21"), Status: "Assigned", Title: "this is 3rd issue" }, { Id: 4, Owner: "Person-A", Created: new Date('2022-09-18'), Due: new Date("2022-09-21"), Status: "Assigned", Title: "this is 4th issue" }, { Id: 5, Owner: "Person-A", Created: new Date('2022-09-18'), Due: new Date("2022-09-21"), Status: "Assigned", Title: "this is 5th issue" }, { Id: 6, Owner: "Person-A", Created: new Date('2022-09-18'), Due: new Date("2022-09-21"), Status: "Assigned", Title: "this is 6th issue" }]
-  // setTimeout(() => {
-  //   setIssues(tempIssues);
-  // }, 3000);
-
-  // let counter=0;
+const EmployeeTable = ({emps}) => {
 
 
 
-  const IssueRow = (props) => {
+  const EmpRow = (props) => {
     return (
       <tr>
-        <td>{props.Id}</td>
-        <td>{props.Title}</td>
-        <td>{props.effort}</td>
-        <td>{props.Owner}</td>
-        <td>{props.Created.toString()}</td>
-        <td>{props.Due.toString()}</td>
-        <td>{props.Status}</td>
-
+         <td>{props._id}</td>
+        <td>{props.firstname}</td>
+        <td>{props.lastname}</td>
+        <td>{props.age}</td>
+        <td>{props.dateofjoining}</td>
+        <td>{props.title}</td>
+        <td>{props.department}</td>
+        <td>{props.employeetype}</td>
+        <td>{props.currentstatus}</td>
+   
 
       </tr>
     )
   }
 
-  const issueRow = issues.map((issue, key) => (
-    <IssueRow Id={issue.Id} Title={issue.Title} Owner={issue.Owner} effort={issue.effort} Created={issue.Created} Due={issue.Due} Status={issue.Status} key={key} />
+  const empRow = emps.map((e, key) => (
+    <EmpRow _id={e._id} firstname={e.firstname} lastname={e.lastname} age={e.age} dateofjoining={e.dateofjoining} title={e.title} department={e.department} employeetype={e.employeetype} currentstatus={e.currentstatus} key={key} />
   ))
-
-  return (<div>
-    <h1>Issue Table</h1>
-    <table >
-      <thead>
-        <tr>
+  const container = {
+    color: "black",
+    backgroundColor: "#9CC4B0",
+    padding: "2rem",
+    fontFamily: "Sans-Serif"
+  };
+  const table = {
+    border:"1px solid black"
+  };
+  const tblCell = {
+    padding: "2rem"
+  }
+  return (<div style={container}>
+    <h1>Employee Table</h1>
+    <table style={table}>
+      <thead >
+        <tr style={tblCell}>
           <th>ID</th>
-          <th>Status</th>
-          <th>Owner</th>
-          <th>effort</th>
-          <th>Created</th>
-          <th>Due</th>
+          <th>FirstName</th>
+          <th>LastName</th>
+          <th>Age</th>
+          <th>DateOfJoining</th>
           <th>Title</th>
+          <th>Department</th>
+          <th>EmployeeType</th>
+          <th>CurrentStatus</th>
           
 
 
         </tr>
       </thead>
       <tbody>
-        {issueRow}
+        {empRow}
       </tbody>
     </table>
   </div>);
 };
 
-const AddIssue = ({AddSingleIssue}) => {
-  // let counter=0;
-  // const newIssue = {  Owner: "Person-B", Created: new Date('2022-09-19'), Due: new Date("2022-09-21"), Status: "Assigned", Title: "this is 1st issue" };
-  // React.useEffect(()=>{
-  //   // console.log('hello',counter);
-    
-  //     AddSingleIssue(newIssue);      
-  
-  //   // counter++;
-  // },[]);
-const handleSubmit=(event)=>{
+const AddEmp = ({AddSingleEmp}) => {
+  const query = `mutation storeEmployeeToDatabase($firstname:String,$lastname: String!,$age:Int!,$dateofjoining:String,$title:String,$department:String,$employeetype:String,$currentstatus:Int) {storeEmployeeToDatabase(firstname: $firstname, lastname: $lastname, age: $age,title:$title,department:$department, employeetype: $employeetype, currentstatus: $currentstatus, dateofjoining: $dateofjoining) { _id firstname lastname age title department dateofjoining employeetype currentstatus }}`;
+const handleSubmit=async (event)=>{
  event.preventDefault();
+
+
+
  let form= document.forms.addForm;
 
-  let newIssue = {
-      Status: form.Status.value,
-      Owner: form.Owner.value,
-      effort: form.effort.value,
-      Created:new Date (form.Created.value),
-      Due: new Date(form.Due.value),
-      Title: form.Title.value,
+  let newEmp = {
+      
+    
+      firstname:form.firstname.value,
+      lastname:form.lastname.value,
+      age:parseInt(form.age.value),
+      dateofjoining:form.dateofjoining.value,
+      title:form.title.value,
+      employeetype:form.employeetype.value,
+      currentstatus:parseInt(form.currentstatus.value),
+      department:form.department.value,
   };
-  AddSingleIssue(newIssue);
-  console.log('form',newIssue);
-  // form.reset();
+  // console.log('id',form.id +1);
+ 
+  var firstname = newEmp.firstname;
+  var lastname = newEmp.lastname;
+  var age = newEmp.age;
+  var dateofjoining = newEmp.dateofjoining;
+  var title = newEmp.title;
+  var employeetype = newEmp.employeetype;
+  var currentstatus = newEmp.currentstatus;
+  var department = newEmp.department;
+
+
+  console.log('newEmp ',lastname);
+
+  
+  fetch("/graphql", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ query, variables: newEmp })
+  }).then((response) => response.json())
+    .then((laptop) => {
+      console.log(laptop)
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+
+
+
+
+  // AddSingleEmp(newEmp);
+ 
+
+;
+setTimeout(() => {
+  window.location.reload();
+}, 3000);
+
 }
-  return ( <div>
-    <h1>This is placeholder for AddIssue</h1>
-    <form name="addForm" onSubmit={handleSubmit}>
-    <input name="Status" placeholder="Status" type="text" />
-      <input name="Owner" placeholder="Owner" type="text" />
-      <input name="effort" placeholder="Effort" type="text" />
-      <input name="Created" placeholder="Created" type="text" />
-      <input name="Due" placeholder="Due" type="text" />
-      <input name="Title" placeholder="Title" type="text" />
+const container = {
+  color: "white",
+  backgroundColor: "DodgerBlue",
+  padding: "2rem",
+  fontFamily: "Sans-Serif"
+};
+  return ( <div style={container}> 
+    <h1>This is placeholder for Adding Employee</h1>
+    <form name="addForm" onSubmit={handleSubmit} >
+    <input name="firstname" placeholder="firstname" type="text" required/>
+    <input name="lastname" placeholder="lastname" type="text" required />
+    <input name="age" size="4" max="70" min="4" placeholder="age" type="number" required/>
+    <input name="dateofjoining" placeholder="dateofjoining" type="date" required />
+    <input name="title" placeholder="title" type="text" />
+    <input name="department" placeholder="department" type="text" required />
+    <input name="employeetype" placeholder="employeetype" type="text" required />
+    <input name="currentstatus" placeholder="currentstatus" type="text"required />
+    
       <button type="submit">Submit</button>
     </form>
   </div>
@@ -110,21 +153,21 @@ const handleSubmit=(event)=>{
 
 
 
-  const IssueList=()=>{
-    // const tempIssues = [{ Id: 1, Owner: "Person-B", effort: 10, Created: new Date('2022-09-19'), Due: new Date("2022-09-21"), Status: "Assigned", Title: "this is 1st issue" }, { Id: 2, Owner: "Person-A",effort: 10, Created: new Date('2022-09-18'), Due: new Date("2022-09-22"), Status: "Resolved", Title: "this is 2nd issue" }, { Id: 3, Owner: "Person-A",effort: 10, Created: new Date('2022-09-18'), Due: new Date("2022-09-21"), Status: "Assigned", Title: "this is 3rd issue" }, { Id: 4, Owner: "Person-A",effort: 10, Created: new Date('2022-09-18'), Due: new Date("2022-09-21"), Status: "Assigned", Title: "this is 4th issue" }, { Id: 5, Owner: "Person-A",effort: 10, Created: new Date('2022-09-18'), Due: new Date("2022-09-21"), Status: "Assigned", Title: "this is 5th issue" }, { Id: 6, Owner: "Person-A", effort: 10,Created: new Date('2022-09-18'), Due: new Date("2022-09-21"), Status: "Assigned", Title: "this is 6th issue" }]
-  // const newIssue = {  Owner: "Person-B", Created: new Date('2022-09-19'), Due: new Date("2022-09-21"), Status: "Assigned", Title: "this is 1st issue" }
-    
-    const [issues, setIssues] = React.useState([]);
+  const EmployeeList=()=>{
+ 
+    const [emps, setEmps] = React.useState([]);
     const query = `
-    query IssueList {
-      issueList {
-        Id
-        Status
-        Owner
-        effort
-        Created
-        Due
-        Title
+    query EmpList {
+      empList {
+       _id
+        firstname
+        lastname
+        age
+        dateofjoining
+        title
+        employeetype
+        currentstatus
+        department
       }
     }`
     React.useEffect(()=>{
@@ -133,38 +176,35 @@ const handleSubmit=(event)=>{
         headers: { 'Content-Type': 'application/json'},
         body: JSON.stringify({ query })
       }).then(async function(response){
-        let issueData = await response.json();
-        console.log('issuedata-fetch',issueData.data.issueList);
-        setIssues(issueData.data.issueList)
+        let empData = await response.json();
+        console.log('data-fetch',empData.data.empList);
+        setEmps(empData.data.empList);
+        
       })
     },[])
 
-    // const AddSingleIssue=({newIssue})=>{
-    //   // newIssue.Id = issues.length +1;
-    //   let issueList= issues;
-    //   issueList.push(newIssue);
-    //   setIssues(issueList);
-    //     }
+  
 
         
-  const AddSingleIssue = (newIssues) => {
-    newIssues.id = issues.length + 1;
-    let IssueList = issues.slice();
-    IssueList.push(newIssues);
-    setIssues(IssueList);
+  const AddSingleEmp = (newEmp) => {
+    newEmp._id = emps.length + 1;
+    let EmpList = emps.slice();
+    EmpList.push(newEmp);
+    setEmps(EmpList);
   };
     
     return (<>
-      <IssueFilter />
+    <EmployeeFilter />
     <hr />
-    <IssueTable issues={issues} />
+  
+    <EmployeeTable emps={emps} />
     <hr />
-    <AddIssue AddSingleIssue={AddSingleIssue} />
+    <AddEmp AddSingleEmp={AddSingleEmp} />
       </>
       )
     };
 
   const root = ReactDOM.createRoot(document.getElementById("root"));
   root.render(
-    <IssueList />
+    <EmployeeList />
 );

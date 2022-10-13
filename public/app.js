@@ -1,110 +1,165 @@
-const IssueFilter = () => {
-  return /*#__PURE__*/React.createElement("h1", null, "Issue Filter");
+const EmployeeFilter = () => {
+  return /*#__PURE__*/React.createElement("h1", null, "Employee Filter");
 };
-
-const IssueTable = ({
-  issues
+const EmployeeTable = ({
+  emps
 }) => {
-  // const rowStyle = {
-  //   "border": "1px solid"
-  // };
-  // const tempIssues = [];
-  // const tempIssues = [{ Id: 1, Owner: "Person-B", Created: new Date('2022-09-19'), Due: new Date("2022-09-21"), Status: "Assigned", Title: "this is 1st issue" }, { Id: 2, Owner: "Person-A", Created: new Date('2022-09-18'), Due: new Date("2022-09-22"), Status: "Resolved", Title: "this is 2nd issue" }, { Id: 3, Owner: "Person-A", Created: new Date('2022-09-18'), Due: new Date("2022-09-21"), Status: "Assigned", Title: "this is 3rd issue" }, { Id: 4, Owner: "Person-A", Created: new Date('2022-09-18'), Due: new Date("2022-09-21"), Status: "Assigned", Title: "this is 4th issue" }, { Id: 5, Owner: "Person-A", Created: new Date('2022-09-18'), Due: new Date("2022-09-21"), Status: "Assigned", Title: "this is 5th issue" }, { Id: 6, Owner: "Person-A", Created: new Date('2022-09-18'), Due: new Date("2022-09-21"), Status: "Assigned", Title: "this is 6th issue" }]
-  // const newIssue = {  Owner: "Person-B", Created: new Date('2022-09-19'), Due: new Date("2022-09-21"), Status: "Assigned", Title: "this is 1st issue" }
-  // const [issues, setIssues] = React.useState(tempIssues);
-  // const issues = [{ Id: 1, Owner: "Person-B", Created: new Date('2022-09-19'), Due: new Date("2022-09-21"), Status: "Assigned", Title: "this is 1st issue" }, { Id: 2, Owner: "Person-A", Created: new Date('2022-09-18'), Due: new Date("2022-09-22"), Status: "Resolved", Title: "this is 2nd issue" }, { Id: 3, Owner: "Person-A", Created: new Date('2022-09-18'), Due: new Date("2022-09-21"), Status: "Assigned", Title: "this is 3rd issue" }, { Id: 4, Owner: "Person-A", Created: new Date('2022-09-18'), Due: new Date("2022-09-21"), Status: "Assigned", Title: "this is 4th issue" }, { Id: 5, Owner: "Person-A", Created: new Date('2022-09-18'), Due: new Date("2022-09-21"), Status: "Assigned", Title: "this is 5th issue" }, { Id: 6, Owner: "Person-A", Created: new Date('2022-09-18'), Due: new Date("2022-09-21"), Status: "Assigned", Title: "this is 6th issue" }]
-  // setTimeout(() => {
-  //   setIssues(tempIssues);
-  // }, 3000);
-  // let counter=0;
-  const IssueRow = props => {
-    return /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("td", null, props.Id), /*#__PURE__*/React.createElement("td", null, props.Title), /*#__PURE__*/React.createElement("td", null, props.effort), /*#__PURE__*/React.createElement("td", null, props.Owner), /*#__PURE__*/React.createElement("td", null, props.Created.toString()), /*#__PURE__*/React.createElement("td", null, props.Due.toString()), /*#__PURE__*/React.createElement("td", null, props.Status));
+  const EmpRow = props => {
+    return /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("td", null, props._id), /*#__PURE__*/React.createElement("td", null, props.firstname), /*#__PURE__*/React.createElement("td", null, props.lastname), /*#__PURE__*/React.createElement("td", null, props.age), /*#__PURE__*/React.createElement("td", null, props.dateofjoining), /*#__PURE__*/React.createElement("td", null, props.title), /*#__PURE__*/React.createElement("td", null, props.department), /*#__PURE__*/React.createElement("td", null, props.employeetype), /*#__PURE__*/React.createElement("td", null, props.currentstatus));
   };
-
-  const issueRow = issues.map((issue, key) => /*#__PURE__*/React.createElement(IssueRow, {
-    Id: issue.Id,
-    Title: issue.Title,
-    Owner: issue.Owner,
-    effort: issue.effort,
-    Created: issue.Created,
-    Due: issue.Due,
-    Status: issue.Status,
+  const empRow = emps.map((e, key) => /*#__PURE__*/React.createElement(EmpRow, {
+    _id: e._id,
+    firstname: e.firstname,
+    lastname: e.lastname,
+    age: e.age,
+    dateofjoining: e.dateofjoining,
+    title: e.title,
+    department: e.department,
+    employeetype: e.employeetype,
+    currentstatus: e.currentstatus,
     key: key
   }));
-  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h1", null, "Issue Table"), /*#__PURE__*/React.createElement("table", null, /*#__PURE__*/React.createElement("thead", null, /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("th", null, "ID"), /*#__PURE__*/React.createElement("th", null, "Status"), /*#__PURE__*/React.createElement("th", null, "Owner"), /*#__PURE__*/React.createElement("th", null, "effort"), /*#__PURE__*/React.createElement("th", null, "Created"), /*#__PURE__*/React.createElement("th", null, "Due"), /*#__PURE__*/React.createElement("th", null, "Title"))), /*#__PURE__*/React.createElement("tbody", null, issueRow)));
+  const container = {
+    color: "black",
+    backgroundColor: "#9CC4B0",
+    padding: "2rem",
+    fontFamily: "Sans-Serif"
+  };
+  const table = {
+    border: "1px solid black"
+  };
+  const tblCell = {
+    padding: "2rem"
+  };
+  return /*#__PURE__*/React.createElement("div", {
+    style: container
+  }, /*#__PURE__*/React.createElement("h1", null, "Employee Table"), /*#__PURE__*/React.createElement("table", {
+    style: table
+  }, /*#__PURE__*/React.createElement("thead", null, /*#__PURE__*/React.createElement("tr", {
+    style: tblCell
+  }, /*#__PURE__*/React.createElement("th", null, "ID"), /*#__PURE__*/React.createElement("th", null, "FirstName"), /*#__PURE__*/React.createElement("th", null, "LastName"), /*#__PURE__*/React.createElement("th", null, "Age"), /*#__PURE__*/React.createElement("th", null, "DateOfJoining"), /*#__PURE__*/React.createElement("th", null, "Title"), /*#__PURE__*/React.createElement("th", null, "Department"), /*#__PURE__*/React.createElement("th", null, "EmployeeType"), /*#__PURE__*/React.createElement("th", null, "CurrentStatus"))), /*#__PURE__*/React.createElement("tbody", null, empRow)));
 };
-
-const AddIssue = ({
-  AddSingleIssue
+const AddEmp = ({
+  AddSingleEmp
 }) => {
-  // let counter=0;
-  // const newIssue = {  Owner: "Person-B", Created: new Date('2022-09-19'), Due: new Date("2022-09-21"), Status: "Assigned", Title: "this is 1st issue" };
-  // React.useEffect(()=>{
-  //   // console.log('hello',counter);
-  //     AddSingleIssue(newIssue);      
-  //   // counter++;
-  // },[]);
-  const handleSubmit = event => {
+  const query = `mutation storeEmployeeToDatabase($firstname:String,$lastname: String!,$age:Int!,$dateofjoining:String,$title:String,$department:String,$employeetype:String,$currentstatus:Int) {storeEmployeeToDatabase(firstname: $firstname, lastname: $lastname, age: $age,title:$title,department:$department, employeetype: $employeetype, currentstatus: $currentstatus, dateofjoining: $dateofjoining) { _id firstname lastname age title department dateofjoining employeetype currentstatus }}`;
+  const handleSubmit = async event => {
     event.preventDefault();
     let form = document.forms.addForm;
-    let newIssue = {
-      Status: form.Status.value,
-      Owner: form.Owner.value,
-      effort: form.effort.value,
-      Created: new Date(form.Created.value),
-      Due: new Date(form.Due.value),
-      Title: form.Title.value
+    let newEmp = {
+      firstname: form.firstname.value,
+      lastname: form.lastname.value,
+      age: parseInt(form.age.value),
+      dateofjoining: form.dateofjoining.value,
+      title: form.title.value,
+      employeetype: form.employeetype.value,
+      currentstatus: parseInt(form.currentstatus.value),
+      department: form.department.value
     };
-    AddSingleIssue(newIssue);
-    console.log('form', newIssue); // form.reset();
-  };
+    // console.log('id',form.id +1);
 
-  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h1", null, "This is placeholder for AddIssue"), /*#__PURE__*/React.createElement("form", {
+    var firstname = newEmp.firstname;
+    var lastname = newEmp.lastname;
+    var age = newEmp.age;
+    var dateofjoining = newEmp.dateofjoining;
+    var title = newEmp.title;
+    var employeetype = newEmp.employeetype;
+    var currentstatus = newEmp.currentstatus;
+    var department = newEmp.department;
+    console.log('newEmp ', lastname);
+    fetch("/graphql", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        query,
+        variables: newEmp
+      })
+    }).then(response => response.json()).then(laptop => {
+      console.log(laptop);
+    }).catch(err => {
+      console.log(err);
+    })
+
+    // AddSingleEmp(newEmp);
+    ;
+
+    setTimeout(() => {
+      window.location.reload();
+    }, 3000);
+  };
+  const container = {
+    color: "white",
+    backgroundColor: "DodgerBlue",
+    padding: "2rem",
+    fontFamily: "Sans-Serif"
+  };
+  return /*#__PURE__*/React.createElement("div", {
+    style: container
+  }, /*#__PURE__*/React.createElement("h1", null, "This is placeholder for Adding Employee"), /*#__PURE__*/React.createElement("form", {
     name: "addForm",
     onSubmit: handleSubmit
   }, /*#__PURE__*/React.createElement("input", {
-    name: "Status",
-    placeholder: "Status",
+    name: "firstname",
+    placeholder: "firstname",
+    type: "text",
+    required: true
+  }), /*#__PURE__*/React.createElement("input", {
+    name: "lastname",
+    placeholder: "lastname",
+    type: "text",
+    required: true
+  }), /*#__PURE__*/React.createElement("input", {
+    name: "age",
+    size: "4",
+    max: "70",
+    min: "4",
+    placeholder: "age",
+    type: "number",
+    required: true
+  }), /*#__PURE__*/React.createElement("input", {
+    name: "dateofjoining",
+    placeholder: "dateofjoining",
+    type: "date",
+    required: true
+  }), /*#__PURE__*/React.createElement("input", {
+    name: "title",
+    placeholder: "title",
     type: "text"
   }), /*#__PURE__*/React.createElement("input", {
-    name: "Owner",
-    placeholder: "Owner",
-    type: "text"
+    name: "department",
+    placeholder: "department",
+    type: "text",
+    required: true
   }), /*#__PURE__*/React.createElement("input", {
-    name: "effort",
-    placeholder: "Effort",
-    type: "text"
+    name: "employeetype",
+    placeholder: "employeetype",
+    type: "text",
+    required: true
   }), /*#__PURE__*/React.createElement("input", {
-    name: "Created",
-    placeholder: "Created",
-    type: "text"
-  }), /*#__PURE__*/React.createElement("input", {
-    name: "Due",
-    placeholder: "Due",
-    type: "text"
-  }), /*#__PURE__*/React.createElement("input", {
-    name: "Title",
-    placeholder: "Title",
-    type: "text"
+    name: "currentstatus",
+    placeholder: "currentstatus",
+    type: "text",
+    required: true
   }), /*#__PURE__*/React.createElement("button", {
     type: "submit"
   }, "Submit")));
 };
-
-const IssueList = () => {
-  // const tempIssues = [{ Id: 1, Owner: "Person-B", effort: 10, Created: new Date('2022-09-19'), Due: new Date("2022-09-21"), Status: "Assigned", Title: "this is 1st issue" }, { Id: 2, Owner: "Person-A",effort: 10, Created: new Date('2022-09-18'), Due: new Date("2022-09-22"), Status: "Resolved", Title: "this is 2nd issue" }, { Id: 3, Owner: "Person-A",effort: 10, Created: new Date('2022-09-18'), Due: new Date("2022-09-21"), Status: "Assigned", Title: "this is 3rd issue" }, { Id: 4, Owner: "Person-A",effort: 10, Created: new Date('2022-09-18'), Due: new Date("2022-09-21"), Status: "Assigned", Title: "this is 4th issue" }, { Id: 5, Owner: "Person-A",effort: 10, Created: new Date('2022-09-18'), Due: new Date("2022-09-21"), Status: "Assigned", Title: "this is 5th issue" }, { Id: 6, Owner: "Person-A", effort: 10,Created: new Date('2022-09-18'), Due: new Date("2022-09-21"), Status: "Assigned", Title: "this is 6th issue" }]
-  // const newIssue = {  Owner: "Person-B", Created: new Date('2022-09-19'), Due: new Date("2022-09-21"), Status: "Assigned", Title: "this is 1st issue" }
-  const [issues, setIssues] = React.useState([]);
+const EmployeeList = () => {
+  const [emps, setEmps] = React.useState([]);
   const query = `
-    query IssueList {
-      issueList {
-        Id
-        Status
-        Owner
-        effort
-        Created
-        Due
-        Title
+    query EmpList {
+      empList {
+       _id
+        firstname
+        lastname
+        age
+        dateofjoining
+        title
+        employeetype
+        currentstatus
+        department
       }
     }`;
   React.useEffect(() => {
@@ -117,30 +172,22 @@ const IssueList = () => {
         query
       })
     }).then(async function (response) {
-      let issueData = await response.json();
-      console.log('issuedata-fetch', issueData.data.issueList);
-      setIssues(issueData.data.issueList);
+      let empData = await response.json();
+      console.log('data-fetch', empData.data.empList);
+      setEmps(empData.data.empList);
     });
-  }, []); // const AddSingleIssue=({newIssue})=>{
-  //   // newIssue.Id = issues.length +1;
-  //   let issueList= issues;
-  //   issueList.push(newIssue);
-  //   setIssues(issueList);
-  //     }
-
-  const AddSingleIssue = newIssues => {
-    newIssues.id = issues.length + 1;
-    let IssueList = issues.slice();
-    IssueList.push(newIssues);
-    setIssues(IssueList);
+  }, []);
+  const AddSingleEmp = newEmp => {
+    newEmp._id = emps.length + 1;
+    let EmpList = emps.slice();
+    EmpList.push(newEmp);
+    setEmps(EmpList);
   };
-
-  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(IssueFilter, null), /*#__PURE__*/React.createElement("hr", null), /*#__PURE__*/React.createElement(IssueTable, {
-    issues: issues
-  }), /*#__PURE__*/React.createElement("hr", null), /*#__PURE__*/React.createElement(AddIssue, {
-    AddSingleIssue: AddSingleIssue
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(EmployeeFilter, null), /*#__PURE__*/React.createElement("hr", null), /*#__PURE__*/React.createElement(EmployeeTable, {
+    emps: emps
+  }), /*#__PURE__*/React.createElement("hr", null), /*#__PURE__*/React.createElement(AddEmp, {
+    AddSingleEmp: AddSingleEmp
   }));
 };
-
 const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render( /*#__PURE__*/React.createElement(IssueList, null));
+root.render( /*#__PURE__*/React.createElement(EmployeeList, null));

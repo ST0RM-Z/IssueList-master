@@ -1,4 +1,6 @@
 const express = require("express");
+require('./models/db')
+const Emp = require('./models/emps');
 const { ApolloServer } = require("apollo-server-express");
 
 
@@ -8,46 +10,78 @@ const PORT = 3000;
 
 // ---------------graphql -------------------
     const typeDefs = `
-    type issue{
-      Id:String!
-      Status:String!
-      Owner:String!
-      effort:Int
-      Created:String
-      Due:String
-      Title:String
+    input inputEmp { 
+  
+    firstname: String!,
+    lastname: String!,
+    age: Int!,
+    dateofjoining: String!,
+    title: String!,
+    department: String!,
+    employeetype: String!
+   
+    }
+    type Emp{
+      _id:ID!,
+      firstname:String,
+      lastname:String,
+      age:Int,
+      dateofjoining:String,
+      title:String,
+      department:String,
+      employeetype:String,
+      currentstatus:Int,
 
     }
       type Query {
-        about: String!
-        issueList: [issue]
+      
+        empList: [Emp]
       }
       type Mutation {
-        setAboutMessage(message: String!): String
+        storeEmployeeToDatabase(firstname:String,lastname: String!,age:Int!,dateofjoining:String,title:String,department:String,employeetype:String,currentstatus:Int): Emp
       }
 
    
     `;
-const aboutMessage = "hello i am just developer";
-const tempIssues = [{ Id: 1, Owner: "Person-B", effort: 10, Created: new Date('2022-09-19'), Due: new Date("2022-09-21"), Status: "Assigned", Title: "this is 1st issue" }, { Id: 2, Owner: "Person-A",effort: 10, Created: new Date('2022-09-18'), Due: new Date("2022-09-22"), Status: "Resolved", Title: "this is 2nd issue" }, { Id: 3, Owner: "Person-A",effort: 10, Created: new Date('2022-09-18'), Due: new Date("2022-09-21"), Status: "Assigned", Title: "this is 3rd issue" }, { Id: 4, Owner: "Person-A",effort: 10, Created: new Date('2022-09-18'), Due: new Date("2022-09-21"), Status: "Assigned", Title: "this is 4th issue" }, { Id: 5, Owner: "Person-A",effort: 10, Created: new Date('2022-09-18'), Due: new Date("2022-09-21"), Status: "Assigned", Title: "this is 5th issue" }, { Id: 6, Owner: "Person-A", effort: 10,Created: new Date('2022-09-18'), Due: new Date("2022-09-21"), Status: "Assigned", Title: "this is 6th issue" }]
 
-function setAboutMessage(_, { message }) {
-  return aboutMessage = message;
-}
+ 
+    async function storeEmployeeToDatabase(_,{
+    
+      firstname,
+      lastname,
+      age,
+      dateofjoining,
+      title,
+      department,
+      employeetype,
+      currentstatus,
+    })
+    {
+      return new Emp({
+    
+        firstname,
+        lastname,
+        age,
+        dateofjoining,
+        title,
+        department,
+        employeetype,
+        currentstatus,
+      }).save();
+  }
     const resolvers = {
       Query: {
-        about: () => aboutMessage,
-        issueList
+       
+        empList
       },
       Mutation: {
-        setAboutMessage,
+        storeEmployeeToDatabase
       },
     };
-
-   function issueList(){
-    return tempIssues;
-    
-   }
+    async function empList() {
+      // return tempIssues;
+      return await Emp.find({})
+    }
 
 const server = new ApolloServer({
   typeDefs,

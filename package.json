@@ -11,11 +11,12 @@
   "author": "Dhairya Arya",
   "license": "ISC",
   "dependencies": {
-    "apollo":"2.34.0",
-    "apollo-server-express": "^3.10.2",
+    "apollo": "2.34.0",
+    "apollo-server-express": "^3.10.3",
     "concurrently": "^7.4.0",
     "express": "^4.18.1",
     "graphql": "^15.8.0",
+    "mongoose": "^6.6.5",
     "nodemon": "^2.0.20"
   },
   "devDependencies": {
